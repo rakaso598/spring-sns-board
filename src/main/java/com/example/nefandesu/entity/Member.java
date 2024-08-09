@@ -14,11 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @Setter
 @Entity
-public class Post {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String content;
+    private String username;
+    private String email;
+    private String password;
 }
-

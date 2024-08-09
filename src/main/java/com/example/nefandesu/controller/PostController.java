@@ -2,11 +2,13 @@ package com.example.nefandesu.controller;
 
 import com.example.nefandesu.entity.Post;
 import com.example.nefandesu.service.PostService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
