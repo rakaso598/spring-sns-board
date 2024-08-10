@@ -1,6 +1,6 @@
-package com.example.nefandesu.config;
+package com.example.nefandesu.security;
 
-import com.example.nefandesu.service.CustomOAuth2UserService;
+import com.example.nefandesu.security.service.CustomOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +26,8 @@ public class SecurityConfig {
                 )
                 .oauth2Login(oauth2Login ->
                         oauth2Login
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/main")
                                 .userInfoEndpoint(userInfoEndpoint ->
                                         userInfoEndpoint.userService(customOAuth2UserService)
                                 )

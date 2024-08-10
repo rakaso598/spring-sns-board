@@ -22,5 +22,7 @@ public class Post {
     private String title;
 
     private String content;
+
+    private Long memberId; // 작성자 ID
 }
 

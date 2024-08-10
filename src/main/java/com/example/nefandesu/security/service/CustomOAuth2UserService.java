@@ -1,9 +1,9 @@
-package com.example.nefandesu.service;
+package com.example.nefandesu.security.service;
 
 import com.example.nefandesu.entity.Member;
 import com.example.nefandesu.repository.MemberRepository;
+import com.example.nefandesu.security.CustomOAuth2User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -16,24 +16,32 @@ import java.util.Optional;
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
-    @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
+
+    public CustomOAuth2UserService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
+        // CustomOAuth2User 객체 생성
+        return createCustomOAuth2User(oAuth2User);
+    }
+
+    private CustomOAuth2User createCustomOAuth2User(OAuth2User oAuth2User) {
         String email = oAuth2User.getAttribute("email");
         String username = oAuth2User.getAttribute("name");
 
-        // 사용자 정보 처리 로직 추가
-        saveUser(email, username);
+        // 사용자 정보를 데이터베이스에서 조회
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new OAuth2AuthenticationException("User not found"));
 
-        return oAuth2User;
+        // CustomOAuth2User 객체 생성
+        return new CustomOAuth2User(oAuth2User.getAttributes(), member);
     }
 
     private void saveUser(String email, String username) {
-        // 사용자 정보를 데이터베이스에 저장하는 로직 구현
         Optional<Member> memberOptional = memberRepository.findByEmail(email);
         if (!memberOptional.isPresent()) {
             Member member = new Member();
@@ -42,6 +50,4 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             memberRepository.save(member);
         }
     }
-
-
 }
