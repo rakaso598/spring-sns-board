@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD 게시판</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>CRUD 게시판</h1>
+<div class="form-container">
+    <form id="post-form">
+        <input type="text" id="title" placeholder="Title" required>
+        <input type="text" id="content" placeholder="Content" required>
+        <button type="submit">Create Post</button>
+    </form>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="posts-table-body">
+    <!-- Posts will be inserted here -->
+    </tbody>
+</table>
+
+<script>
+    async function fetchPosts() {
+        try {
+            const response = await fetch('http://localhost:8090/api/posts');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const posts = await response.json();
+            const tableBody = document.getElementById('posts-table-body');
+            tableBody.innerHTML = ''; // Clear existing rows
+            posts.forEach(post => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${post.id}</td>
+                    <td>${post.title}</td>
+                    <td>${post.content}</td>
+                    <td>
+                        <button onclick="deletePost(${post.id})">Delete</button>
+                        <button onclick="editPost(${post.id})">Edit</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    }
+
+    async function createPost(event) {
+        event.preventDefault();
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').value;
+
+        try {
+            const response = await fetch('http://localhost:8090/api/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title, content })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            fetchPosts(); // Refresh the list of posts
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    }
+
+    async function deletePost(id) {
+        try {
+            const response = await fetch(`http://localhost:8090/api/posts/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            fetchPosts(); // Refresh the list of posts
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    }
+
+    async function editPost(id) {
+        const title = prompt("새로운 제목을 입력하세요:");
+        const content = prompt("새로운 내용을 입력하세요:");
+
+        if (title && content) {
+            try {
+                const response = await fetch(`http://localhost:8090/api/posts/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ title, content })
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                fetchPosts(); // 게시물 목록을 새로 고침
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        }
+    }
+
+    document.getElementById('post-form').addEventListener('submit', createPost);
+
+    // Fetch posts when the page loads
+    window.onload = fetchPosts;
+</script>
+</body>
+</html>
