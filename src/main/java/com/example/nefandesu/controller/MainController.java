@@ -7,13 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 public class MainController {
+    @GetMapping("/main-readonly")
+    public String mainReadonly() {
+        return "crud-board-readonly";
+    }
+
     @GetMapping("/main")
-    public String board() {
-        return "crud-board"; // crud-board.html을 반환
+    public String main() {
+        return "crud-board";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // login.html을 반환
+        return "login";
     }
 }

@@ -31,9 +31,8 @@ public class MemberService {
 
     public Member updateMember(Long id, Member memberDetails) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Member not found"));
-        member.setUsername(memberDetails.getUsername());
+        member.setMemberName(memberDetails.getMemberName());
         member.setEmail(memberDetails.getEmail());
-        member.setPassword(memberDetails.getPassword());
         return memberRepository.save(member);
     }
 

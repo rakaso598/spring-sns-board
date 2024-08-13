@@ -32,7 +32,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private CustomOAuth2User createCustomOAuth2User(OAuth2User oAuth2User) {
         String email = oAuth2User.getAttribute("email");
-        String username = oAuth2User.getAttribute("name");
+        String memberName = oAuth2User.getAttribute("name");
 
         // 사용자 정보를 데이터베이스에서 조회
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new OAuth2AuthenticationException("User not found"));
@@ -41,12 +41,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return new CustomOAuth2User(oAuth2User.getAttributes(), member);
     }
 
-    private void saveUser(String email, String username) {
+    private void saveUser(String email, String memberName) {
         Optional<Member> memberOptional = memberRepository.findByEmail(email);
         if (!memberOptional.isPresent()) {
             Member member = new Member();
             member.setEmail(email);
-            member.setUsername(username);
+            member.setMemberName(memberName);
             memberRepository.save(member);
         }
     }

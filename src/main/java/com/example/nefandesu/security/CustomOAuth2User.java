@@ -1,6 +1,7 @@
 package com.example.nefandesu.security;
 
 import com.example.nefandesu.entity.Member;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@Slf4j
 public class CustomOAuth2User implements OAuth2User {
 
     private final Map<String, Object> attributes;
@@ -32,7 +34,7 @@ public class CustomOAuth2User implements OAuth2User {
 
     @Override
     public String getName() {
-        return member.getUsername();
+        return member.getMemberName();
     }
 
     public Member getMember() {

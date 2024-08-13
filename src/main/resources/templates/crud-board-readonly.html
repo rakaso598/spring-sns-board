@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD 게시판</title>
+    <title>*READONLY* 게시판</title>
     <style>
         table {
             width: 100%;
@@ -19,42 +19,17 @@
         .form-container {
             margin-bottom: 20px;
         }
-        .__layout {
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-        }
-        .board-title {
-            display: flex;
-        }
-        .board-login {
-            display: flex;
-        }
-        .board-create-post {
-            display: flex;
-        }
-        .board-footer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
     </style>
 </head>
 <body>
-<div class="__layout">
-<div class="board-title"><h1>Nefandesu</h1></div>
-<div class="board-login">
-    <a href="/login">로그인</a>
-    <a href="/api/members/me">회원정보관리</a>
-</div>
-<div class="board-create-post">
-    <div class="form-container">
-        <form id="post-form">
-            <input type="text" id="title" placeholder="Title" required>
-            <input type="text" id="content" placeholder="Content" required>
-            <button type="submit">Create Post</button>
-        </form>
-    </div>
+<h1>CRUD 게시판</h1>
+<a href="/login">로그인 하기</a>
+<div class="form-container">
+    <form id="post-form">
+        <input type="text" id="title" placeholder="Title" required>
+        <input type="text" id="content" placeholder="Content" required>
+        <button type="submit">Create Post</button>
+    </form>
 </div>
 <table>
     <thead>
@@ -69,12 +44,6 @@
     <!-- Posts will be inserted here -->
     </tbody>
 </table>
-<div class="board-footer">
-    <div>Made by github@rakaso598</div>
-    <div>Restful API</div>
-    <div>CRUD Board</div>
-</div>
-</div>
 
 <script>
     async function fetchPosts() {
