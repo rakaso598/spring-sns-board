@@ -129,12 +129,13 @@
     async function deletePost(id) {
         try {
             const response = await fetch(`http://localhost:8090/api/posts/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                credentials: 'include' // 요청에 자격 증명을 포함
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            fetchPosts(); // Refresh the list of posts
+            fetchPosts(); // 게시물 목록을 새로 고침
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
         }
@@ -148,6 +149,7 @@
             try {
                 const response = await fetch(`http://localhost:8090/api/posts/${id}`, {
                     method: 'PUT',
+                    credentials: 'include', // 요청에 자격 증명을 포함
                     headers: {
                         'Content-Type': 'application/json'
                     },
