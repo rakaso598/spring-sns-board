@@ -26,9 +26,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
+        // 사용자 정보 추출
+        String email = oAuth2User.getAttribute("email");
+        String memberName = oAuth2User.getAttribute("name");
+
+        // 데이터베이스에 사용자가 없으면 저장
+        saveUser(email, memberName);
+
         // CustomOAuth2User 객체 생성
         return createCustomOAuth2User(oAuth2User);
     }
+
 
     private CustomOAuth2User createCustomOAuth2User(OAuth2User oAuth2User) {
         String email = oAuth2User.getAttribute("email");
