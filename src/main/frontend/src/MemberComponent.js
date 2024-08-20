@@ -37,7 +37,7 @@ const MemberComponent = () => {
             <h2>현재 사용자 정보</h2>
             {currentUser ? (
                 <div>
-                    <p>이름: {currentUser.name}</p>
+                    <p>이름: {currentUser.memberName}</p>
                     <p>이메일: {currentUser.email}</p>
                     <button onClick={deleteCurrentUser}>회원 탈퇴</button>
                 </div>

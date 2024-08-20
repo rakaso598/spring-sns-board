@@ -1,6 +1,7 @@
 // CurrentUser.js
 import React, { useEffect, useState } from 'react';
 import { getCurrentUser } from './api';
+import './CurrentUser.css';
 
 const CurrentUser = ({ openModal }) => {
     const [user, setUser] = useState(null);
@@ -23,9 +24,9 @@ const CurrentUser = ({ openModal }) => {
     }
 
     return (
-        <div>
+        <div className="title">
             <h1>Welcome, {user.memberName}!</h1>
-            <p>Email: {user.email}</p>
+            <p>{user.email}으로 로그인되어 있습니다.</p>
             <button onClick={openModal}>내 정보 관리</button>
         </div>
     );

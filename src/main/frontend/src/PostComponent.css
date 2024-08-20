@@ -17,7 +17,8 @@ form {
     margin-bottom: 20px;
 }
 
-input, textarea {
+input,
+textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
