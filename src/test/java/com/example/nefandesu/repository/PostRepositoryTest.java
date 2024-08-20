@@ -1,7 +1,7 @@
 //package com.example.nefandesu.repository;
 //
 //import com.example.nefandesu.entity.Member;
-//import com.example.nefandesu.entity.Post;
+//import com.example.nefandesu.entity.PostComponent.js;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
@@ -26,14 +26,14 @@
 //        member.setMemberName("John Doe");
 //        member = memberRepository.save(member);
 //
-//        Post post = new Post();
+//        PostComponent.js post = new PostComponent.js();
 //        post.setTitle("Test Title");
 //        post.setContent("Test Content");
 //        post.setMember(member);
 //        post = postRepository.save(post);
 //
 //        // When
-//        Post foundPost = postRepository.findById(post.getId()).orElse(null);
+//        PostComponent.js foundPost = postRepository.findById(post.getId()).orElse(null);
 //
 //        // Then
 //        assertThat(foundPost).isNotNull();
