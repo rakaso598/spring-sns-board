@@ -35,7 +35,7 @@ public class MemberController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
+    public ResponseEntity<Member> getMemberById(@PathVariable("id") Long id) {
         Member member = memberService.getMemberById(id);
         return ResponseEntity.ok(member);
     }
@@ -47,13 +47,13 @@ public class MemberController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Member> updateMember(@PathVariable Long id, @RequestBody Member memberDetails) {
+    public ResponseEntity<Member> updateMember(@PathVariable("id") Long id, @RequestBody Member memberDetails) {
         Member updatedMember = memberService.updateMember(id, memberDetails);
         return ResponseEntity.ok(updatedMember);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMember(@PathVariable("id") Long id) {
         memberService.deleteMember(id);
         return ResponseEntity.noContent().build();
     }

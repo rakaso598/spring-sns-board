@@ -28,7 +28,7 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable Long id) {
+    public ResponseEntity<Post> getPostById(@PathVariable("id") Long id) {
         Post post = postService.getPostById(id);
         return ResponseEntity.ok(post);
     }
@@ -45,7 +45,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post postDetails) {
+    public ResponseEntity<Post> updatePost(@PathVariable("id") Long id, @RequestBody Post postDetails) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomOAuth2User customOAuth2User = (CustomOAuth2User) authentication.getPrincipal();
         Member member = customOAuth2User.getMember();
@@ -60,7 +60,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePost(@PathVariable("id") Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomOAuth2User customOAuth2User = (CustomOAuth2User) authentication.getPrincipal();
         Member member = customOAuth2User.getMember();

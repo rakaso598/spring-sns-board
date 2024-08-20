@@ -52,7 +52,7 @@ tasks.withType(JavaCompile) {
 
 task buildReact(type: Exec) {
 	workingDir 'src/main/frontend'
-	commandLine 'C:/Program Files/nodejs/npm.cmd', 'run', 'build' // npm의 절대 경로를 사용
+	commandLine 'C:/Program Files/nodejs/npm.cmd', 'run', 'build'
 }
 
 task copyReactBuild(type: Copy) {
