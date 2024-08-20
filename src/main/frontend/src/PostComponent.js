@@ -82,6 +82,7 @@ const PostComponent = () => {
                 {posts.map((post) => (
                     <li key={post.id}>
                         <h2>{post.title}</h2>
+                        <p>글쓴이: {post.member.memberName}</p>
                         <p>{post.content}</p>
                         <button onClick={() => handleEdit(post)}>Edit</button>
                         <button onClick={() => handleDelete(post.id)}>Delete</button>
