@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { getCurrentUser } from './api';
 
-const CurrentUser = () => {
+const CurrentUser = ({ openModal }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const CurrentUser = () => {
         <div>
             <h1>Welcome, {user.memberName}!</h1>
             <p>Email: {user.email}</p>
-            {/* Add more user details as needed */}
+            <button onClick={openModal}>내 정보 관리</button>
         </div>
     );
 };
