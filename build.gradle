@@ -49,3 +49,16 @@ tasks.named('test') {
 tasks.withType(JavaCompile) {
 	options.compilerArgs << '-parameters'
 }
+
+task buildReact(type: Exec) {
+	workingDir 'src/main/frontend'
+	commandLine 'C:/Program Files/nodejs/npm.cmd', 'run', 'build' // npm의 절대 경로를 사용
+}
+
+task copyReactBuild(type: Copy) {
+	dependsOn buildReact
+	from 'src/main/frontend/build'
+	into 'src/main/resources/static'
+}
+
+processResources.dependsOn copyReactBuild

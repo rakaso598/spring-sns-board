@@ -23,13 +23,13 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/login**", "/main-readonly").permitAll()
+                        .requestMatchers("/login**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2Login ->
                         oauth2Login
                                 .loginPage("/login")
-                                .defaultSuccessUrl("/main")
+                                .defaultSuccessUrl("/")
                                 .userInfoEndpoint(userInfoEndpoint ->
                                         userInfoEndpoint.userService(customOAuth2UserService)
                                 )
@@ -37,6 +37,11 @@ public class SecurityConfig {
 
 
         return http.build();
+
+
+
+
+
     }
 }
 
