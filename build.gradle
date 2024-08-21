@@ -50,6 +50,13 @@ tasks.withType(JavaCompile) {
 	options.compilerArgs << '-parameters'
 }
 
+def frontendDir = "$projectDir/src/main/frontend"
+
+task installReact(type: Exec) {
+	workingDir frontendDir
+	commandLine 'C:/Program Files/nodejs/npm.cmd', 'install'
+}
+
 task buildReact(type: Exec) {
 	workingDir 'src/main/frontend'
 	commandLine 'C:/Program Files/nodejs/npm.cmd', 'run', 'build'

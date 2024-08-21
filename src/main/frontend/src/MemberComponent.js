@@ -40,6 +40,8 @@ const MemberComponent = () => {
                     <p>이름: {currentUser.memberName}</p>
                     <p>이메일: {currentUser.email}</p>
                     <button onClick={deleteCurrentUser}>회원 탈퇴</button>
+                    <p>Google 등 소셜 계정으로 로그인한 경우 사용자 정보 수정이 불가능합니다.</p>
+                    <p>탈퇴버튼 클릭시 즉시 회원탈퇴되며 해당 유저의 정보를 읽을 수 없게 됩니다.</p>
                 </div>
             ) : (
                 <p>로그인된 사용자가 없습니다.</p>

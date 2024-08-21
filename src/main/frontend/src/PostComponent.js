@@ -59,7 +59,8 @@ const PostComponent = () => {
 
     return (
         <div>
-            <h1>글을 작성해보세요!</h1>
+            <hr style={{ border: '1px solid gray', margin: '20px 0' }} />
+            <h1 style={{ color: 'blue' }}>글을 작성해보세요!</h1>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -90,20 +91,20 @@ const PostComponent = () => {
                     {editMode ? '글을 수정할게요!' : '지금 바로 글 쓰기!'}
                 </button>
             </form>
+            <hr style={{ border: '1px solid gray', margin: '20px 0' }} />
             <ul>
                 {posts.map((post) => (
                     <li key={post.id}>
                         <h2>{post.title}</h2>
                         <p>{post.member && post.member.memberName ? (
-                            <p>글쓴이: {post.member.memberName}</p>
+                            <p style={{ color: 'blueviolet' }}>글쓴이: {post.member.memberName}</p>
                         ) : (
-                            <p>글쓴이: 유저 정보가 없습니다.</p>
+                            <p style={{ color: 'blueviolet' }}>글쓴이: 유저 정보가 없습니다.</p>
                         )}</p>
                         <p>{post.content}</p>
 
-                        <button onClick={() => handleEdit(post)}>Edit</button>
-                        <button onClick={() => handleDelete(post.id)}>Delete</button>
-
+                        <button onClick={() => handleEdit(post)}>수정</button>
+                        <button onClick={() => handleDelete(post.id)}>삭제</button>
                     </li>
                 ))}
             </ul>
