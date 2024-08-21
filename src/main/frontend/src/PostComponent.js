@@ -59,55 +59,61 @@ const PostComponent = () => {
 
     return (
         <div>
-            <hr style={{ border: '1px solid gray', margin: '20px 0' }} />
-            <h1 style={{ color: 'blue' }}>글을 작성해보세요!</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="title"
-                    value={post.title}
-                    onChange={handleInputChange}
-                    placeholder="제목을 여기에!"
-                    required
-                />
-                <textarea
-                    name="content"
-                    value={post.content}
-                    onChange={handleInputChange}
-                    placeholder="내용은 여기에!"
-                    required
-                ></textarea>
-                <button
-                    type="submit"
-                    style={{
-                        backgroundColor: editMode ? 'green' : 'blue',
-                        color: 'white',
-                        padding: '10px 20px',
-                        border: 'none',
-                        borderRadius: '5px',
-                        cursor: 'pointer'
-                    }}
-                >
-                    {editMode ? '글을 수정할게요!' : '지금 바로 글 쓰기!'}
-                </button>
-            </form>
-            <hr style={{ border: '1px solid gray', margin: '20px 0' }} />
-            <ul>
-                {posts.map((post) => (
-                    <li key={post.id}>
-                        <h2>{post.title}</h2>
-                        <p>{post.member && post.member.memberName ? (
-                            <p style={{ color: 'blueviolet' }}>글쓴이: {post.member.memberName}</p>
-                        ) : (
-                            <p style={{ color: 'blueviolet' }}>글쓴이: 유저 정보가 없습니다.</p>
-                        )}</p>
-                        <p>{post.content}</p>
+            <hr style={{ border: '1px solid black', margin: '0px' }} />
+            <div className="form-container">
+                <h1 style={{ color: '#E9EDDE', margin: '0', padding: '10px' }}>글을 작성해보세요!</h1>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="title"
+                        value={post.title}
+                        onChange={handleInputChange}
+                        placeholder="제목을 여기에!"
+                        required
+                    />
+                    <textarea
+                        name="content"
+                        value={post.content}
+                        onChange={handleInputChange}
+                        placeholder="내용은 여기에!"
+                        required
+                    ></textarea>
+                    <button
+                        type="submit"
+                        style={{
+                            backgroundColor: editMode ? 'green' : '#5C80BC',
+                            color: 'white',
+                            padding: '10px 20px',
+                            border: 'none',
+                            borderRadius: '5px',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        {editMode ? '글을 수정할게요!' : '바로 글 쓰기!'}
+                    </button>
+                </form>
+            </div>
+            <hr style={{ border: '1px solid black', margin: '0px' }} />
+            <div className="ul-container">
+                <ul>
+                    {posts.map((post) => (
+                        <div className="li-container">
+                            <li key={post.id}>
+                                <h2>{post.title}</h2>
+                                <p>{post.member && post.member.memberName ? (
+                                    <p style={{ color: 'blueviolet' }}>글쓴이: {post.member.memberName}</p>
+                                ) : (
+                                    <p style={{ color: 'blueviolet' }}>글쓴이: 유저 정보가 없습니다.</p>
+                                )}</p>
+                                <p style={{ color: '#4D5061' }}>{post.content}</p>
 
-                        <button onClick={() => handleEdit(post)}>수정</button>
-                        <button onClick={() => handleDelete(post.id)}>삭제</button>
-                    </li>
-                ))}
-            </ul>
+                                <button onClick={() => handleEdit(post)}>수정</button>
+                                <button onClick={() => handleDelete(post.id)}>삭제</button>
+                            </li>
+                        </div>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

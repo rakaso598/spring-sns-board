@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #E7E247;
 }
 
 h1 {
-    margin: 18px;
+    padding: 20px;
 }
