@@ -25,9 +25,8 @@ const CurrentUser = ({ openModal }) => {
 
     return (
         <div className="title">
-            <h1>Welcome, {user.memberName}!</h1>
-            <p>{user.email}으로 로그인되어 있습니다.</p>
-            <button onClick={openModal}>내 정보 관리</button>
+            <h1>{user.memberName}님 안녕하세요!</h1>
+            <button onClick={openModal}>사용자 정보 보기</button>
         </div>
     );
 };

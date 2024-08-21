@@ -18,16 +18,17 @@ function App() {
 
   return (
     <div className="App">
-      <CurrentUser openModal={openModal} />
-      <PostComponent />
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Manage Members"
-      >
-        <button onClick={closeModal}>X</button>
-        <MemberComponent />
-      </Modal>
+      <div className="container">
+        <CurrentUser openModal={openModal} />
+        <PostComponent />
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Manage Members">
+          <button onClick={closeModal}>닫기</button>
+          <MemberComponent />
+        </Modal>
+      </div>
     </div>
   );
 }

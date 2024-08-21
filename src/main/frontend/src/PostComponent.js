@@ -59,24 +59,36 @@ const PostComponent = () => {
 
     return (
         <div>
-            <h1>Posts</h1>
+            <h1>글을 작성해보세요!</h1>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     name="title"
                     value={post.title}
                     onChange={handleInputChange}
-                    placeholder="Title"
+                    placeholder="제목을 여기에!"
                     required
                 />
                 <textarea
                     name="content"
                     value={post.content}
                     onChange={handleInputChange}
-                    placeholder="Content"
+                    placeholder="내용은 여기에!"
                     required
                 ></textarea>
-                <button type="submit">{editMode ? 'Update' : 'Create'}</button>
+                <button
+                    type="submit"
+                    style={{
+                        backgroundColor: editMode ? 'green' : 'blue',
+                        color: 'white',
+                        padding: '10px 20px',
+                        border: 'none',
+                        borderRadius: '5px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    {editMode ? '글을 수정할게요!' : '지금 바로 글 쓰기!'}
+                </button>
             </form>
             <ul>
                 {posts.map((post) => (
