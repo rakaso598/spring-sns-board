@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="container">
+      <div className="container" style={{ maxWidth: '768px', margin: '0 auto' }}>
         <CurrentUser openModal={openModal} />
         <PostComponent />
         <Modal

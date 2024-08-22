@@ -26,7 +26,7 @@ const CurrentUser = ({ openModal }) => {
     return (
         <div className="title">
             <h1 style={{ margin: '10px', padding: '0', color: '#3D3B30' }}>{user.memberName}님 안녕하세요!</h1>
-            <button style={{ margin: '10px', width: '30%' }} onClick={openModal}>회원정보관리</button>
+            <button style={{ margin: '0px 12px 12px 12px', width: '120px' }} onClick={openModal}>회원정보관리</button>
         </div>
     );
 };

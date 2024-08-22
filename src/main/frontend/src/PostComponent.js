@@ -86,7 +86,9 @@ const PostComponent = () => {
                             padding: '10px 20px',
                             border: 'none',
                             borderRadius: '5px',
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            margin: '0px 12px 12px 12px',
+                            width: '120px'
                         }}
                     >
                         {editMode ? '글을 수정할게요!' : '바로 글 쓰기!'}
@@ -101,9 +103,9 @@ const PostComponent = () => {
                             <li key={post.id}>
                                 <h2>{post.title}</h2>
                                 <p>{post.member && post.member.memberName ? (
-                                    <p style={{ color: 'blueviolet' }}>글쓴이: {post.member.memberName}</p>
+                                    <p style={{ color: '#cb53b3', fontWeight: 'bold' }}>작성자 : {post.member.memberName}</p>
                                 ) : (
-                                    <p style={{ color: 'blueviolet' }}>글쓴이: 유저 정보가 없습니다.</p>
+                                    <p style={{ color: '#cb53b3', fontWeight: 'bold' }}>글쓴이: 유저 정보가 없습니다.</p>
                                 )}</p>
                                 <p style={{ color: '#4D5061' }}>{post.content}</p>
 
