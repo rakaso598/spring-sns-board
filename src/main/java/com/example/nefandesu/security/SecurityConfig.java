@@ -23,9 +23,10 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login**").permitAll()
+                        .requestMatchers("/login**", "/error").permitAll()
                         .anyRequest().authenticated()
                 )
+                // error 패턴 -> 999 에러 해결
                 .oauth2Login(oauth2Login ->
                         oauth2Login
                                 .loginPage("/login")
