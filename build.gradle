@@ -66,18 +66,23 @@ def frontendDir = "$projectDir/src/main/frontend"
 
 task installReact(type: Exec) {
 	workingDir frontendDir
-	commandLine 'C:/Program Files/nodejs/npm.cmd', 'install'
+	commandLine 'npm', 'install'
 }
 
 task buildReact(type: Exec) {
-	workingDir 'src/main/frontend'
-	commandLine 'C:/Program Files/nodejs/npm.cmd', 'run', 'build'
+	dependsOn installReact
+	workingDir frontendDir
+	commandLine 'npm', 'run', 'build'
 }
 
-task copyReactBuild(type: Copy) {
+task copyReactBuildFiles(type: Copy) {
 	dependsOn buildReact
-	from 'src/main/frontend/build'
-	into 'src/main/resources/static'
+	from "$frontendDir/build"
+	into "$projectDir/src/main/resources/static"
+}
+
+processResources {
+	dependsOn copyReactBuildFiles
 }
 
 processResources.dependsOn copyReactBuild
