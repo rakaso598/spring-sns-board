@@ -45,8 +45,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	implementation 'javax.servlet:javax.servlet-api:4.0.1'
-	providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+	implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+	providedCompile 'jakarta.servlet:jakarta.servlet-api:5.0.0'
 	// MySQL
 	implementation 'mysql:mysql-connector-java:5.1.45'
 	// MariaDB
