@@ -64,25 +64,15 @@ tasks.withType(JavaCompile) {
 
 def frontendDir = "$projectDir/src/main/frontend"
 
-task installReact(type: Exec) {
-	workingDir frontendDir
-	commandLine 'npm', 'install'
-}
-
 task buildReact(type: Exec) {
-	dependsOn installReact
-	workingDir frontendDir
+	workingDir 'path/to/react'
 	commandLine 'npm', 'run', 'build'
 }
 
-task copyReactBuildFiles(type: Copy) {
-	dependsOn buildReact
-	from "$frontendDir/build"
-	into "$projectDir/src/main/resources/static"
+task copyReactBuild(type: Copy) {
+	from 'path/to/react/build'
+	into 'path/to/springboot/static'
 }
 
-processResources {
-	dependsOn copyReactBuildFiles
-}
-
-processResources.dependsOn copyReactBuild
+build.dependsOn(copyReactBuild)
+copyReactBuild.dependsOn(buildReact)
