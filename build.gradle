@@ -37,6 +37,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.26'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
@@ -47,11 +48,9 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
 	providedCompile 'jakarta.servlet:jakarta.servlet-api:5.0.0'
-	// MySQL
 	implementation 'mysql:mysql-connector-java:5.1.45'
-	// MariaDB
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.6.2'
-	implementation 'mysql:mysql-connector-java'
+	runtimeOnly 'mysql:mysql-connector-java'
 }
 
 tasks.named('test') {
@@ -64,15 +63,22 @@ tasks.withType(JavaCompile) {
 
 def frontendDir = "$projectDir/src/main/frontend"
 
+task installReact(type: Exec) {
+	workingDir frontendDir
+	commandLine 'C:/Program Files/nodejs/npm.cmd', 'install'
+}
+
 task buildReact(type: Exec) {
-	workingDir 'path/to/react'
-	commandLine 'npm', 'run', 'build'
+	workingDir 'src/main/frontend'
+	commandLine 'C:/Program Files/nodejs/npm.cmd', 'run', 'build'
 }
 
-task copyReactBuild(type: Copy) {
-	from 'path/to/react/build'
-	into 'path/to/springboot/static'
+task copyReactBuildFiles(type: Copy) {
+	dependsOn buildReact
+	from "$frontendDir/build"
+	into "$projectDir/src/main/resources/static"
 }
 
-build.dependsOn(copyReactBuild)
-copyReactBuild.dependsOn(buildReact)
+processResources {
+	dependsOn copyReactBuildFiles
+}

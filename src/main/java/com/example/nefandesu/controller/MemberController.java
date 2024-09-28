@@ -3,6 +3,7 @@ package com.example.nefandesu.controller;
 import com.example.nefandesu.entity.Member;
 import com.example.nefandesu.security.CustomOAuth2User;
 import com.example.nefandesu.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +15,12 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/members")
 public class MemberController {
+
     @Autowired
-    private MemberService memberService;
+    private final MemberService memberService;
 
     @GetMapping
     public ResponseEntity<List<Member>> getAllMembers() {

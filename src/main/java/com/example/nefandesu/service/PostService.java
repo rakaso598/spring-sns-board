@@ -3,6 +3,7 @@ package com.example.nefandesu.service;
 import com.example.nefandesu.entity.Post;
 import com.example.nefandesu.repository.PostRepository;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,11 +11,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Slf4j
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class PostService {
+
     @Autowired
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     public List<Post> getAllPosts() {
         return postRepository.findAll();

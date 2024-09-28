@@ -4,6 +4,7 @@ import com.example.nefandesu.entity.Member;
 import com.example.nefandesu.entity.Post;
 import com.example.nefandesu.security.CustomOAuth2User;
 import com.example.nefandesu.service.PostService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,12 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/posts")
 public class PostController {
+
     @Autowired
-    private PostService postService;
+    private final PostService postService;
 
     @GetMapping
     public ResponseEntity<List<Post>> getAllPosts() {

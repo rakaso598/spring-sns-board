@@ -4,6 +4,7 @@ import com.example.nefandesu.entity.Member;
 import com.example.nefandesu.exception.ResourceNotFoundException;
 import com.example.nefandesu.repository.MemberRepository;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +12,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Slf4j
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class MemberService {
+
     @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
